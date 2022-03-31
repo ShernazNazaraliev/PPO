@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создание ингредиентов</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <style>
+        .btn-edit {
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* Darker background on mouse-over */
+        .btn-edit:hover {
+            background-color: RoyalBlue;
+        }
+
+        .btn-del {
+            background-color: Red;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* Darker background on mouse-over */
+        .btn-del:hover {
+            background-color: darkred;
+        }
+
+        .header{
+            font-family: 'Playfair Display SC', serif;
+            font-weight: 1500;
+            letter-spacing: 5px;
+            font-size: 34px;
+            color: darkblue;
+            text-align: center;
+        }
+        .menu{
+            background-color: azure;
+        }
+
+
+        body {
+            background-image: url("../images/pngtree-coffee-shop-poster-background-material-image_155518.jpg"); /* Путь к фоновому изображению */
+            /*background-color: #c7b39b; !* Цвет фона *!*/
+            font-weight: 600;
+            font-family: 'Playfair Display SC', serif;
+        }
+    </style>
+
+    <link rel="stylesheet" href="style.css" type="text/css" >
+</head>
+<body>
+<ul class="nav nav-pills nav-fill">
+    <li class="nav-item"><a class="nav-link" href="/">Главная</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/employee">Сотрудники</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/budget">Бюджет</a><br></li>
+    <li class="nav-item"><a class="nav-link  active" href="/ingredient">Ингредиенты</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/material">Материалы</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/position">Должности</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/product">Продукты</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/production">Производства</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/purchase">Закупка</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/sale">Продажа</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/salary">Зарплаты</a><br></li>
+</ul>
+<div class="pl-5">
+    <h1 class="header"> Добавление Ингредиентов</h1>
+    <form action="#" th:action="@{/ingredient/create}" method="post" th:object="${ingredient}">
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"  for="productsList">Продукт</label>
+            <div class="col-sm-5">
+                <select required class="form-control" id="productsList" th:field="${ingredient.productId}">
+                    <option th:value="null"></option>
+                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+                </select>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"  for="positionList">Материал</label>
+            <div class="col-sm-5">
+                <select required class="form-control" id="positionList" th:field="${ingredient.materialId}">
+                    <option th:value="null"></option>
+                    <option th:each="material : ${materials}" th:value="${material.id}"
+                            th:text="${material.name}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label"  for="phone">Количество</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="phone" th:field="*{quantity}">
+            </div>
+        </div>
+        <button class="btn btn-success" type="submit" value="Add User">Сохранить</button>
+    </form>
+
+</div>
+</body>
+</html>

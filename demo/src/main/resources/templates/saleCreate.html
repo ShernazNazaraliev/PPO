@@ -1,0 +1,86 @@
+<!DOCTYPE html >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавление продажи</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css" type="text/css" >
+</head>
+<body>
+<ul class="nav nav-pills nav-fill">
+    <li class="nav-item"><a class="nav-link" href="/">Главная</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/employee">Сотрудники</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/budget">Бюджет</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/ingredient">Ингредиенты</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/material">Материалы</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/position">Должности</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/product">Продукты</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/production">Производства</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/purchase">Закупка</a><br></li>
+    <li class="nav-item"><a class="nav-link active" href="/sale">Продажа</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/salary">Зарплаты</a><br></li>
+</ul>
+<div class="pl-5">
+    <h1 class="header"> Добавление продажи </h1>
+    <form action="#" th:action="@{/sale/create}" method="post" th:object="${sale}">
+
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="productList">Продукт</label>
+            <div class="col-sm-5">
+                <select required class="form-control" id="productList" th:field="${sale.productId}">
+                    <option th:value="null"></option>
+                    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="employeeList">Сотрудник</label>
+            <div class="col-sm-5">
+                <select required class="form-control" id="employeeList" th:field="${sale.employeeId}">
+                    <option th:value="null"></option>
+                    <option th:each="employee : ${employees}" th:value="${employee.id}"
+                            th:text="${employee.fullName}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="dateProduction">Дата закупки</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="date" id="dateProduction" th:field="*{dateOfSales}">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" for="quantity">Количество</label>
+            <div class="col-sm-5">
+                <input required class="form-control" type="text" id="quantity" th:field="*{quantity}">
+            </div>
+        </div>
+<!--        <div class="form-group row">-->
+<!--            <label class="col-sm-2 col-form-label" for="price">Цена</label>-->
+<!--            <div class="col-sm-5">-->
+<!--                <input required class="form-control" type="text" id="price" th:field="*{price}">-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <button class="btn btn-success" type="submit" value="Add User">Сохранить</button>
+    </form>
+
+</div>
+
+
+</body>
+</html>

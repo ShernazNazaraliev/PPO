@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Бюджет</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="style.css" type="text/css" >
+    <style>
+        .btn-edit {
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* Darker background on mouse-over */
+        .btn-edit:hover {
+            background-color: RoyalBlue;
+        }
+
+        .btn-del {
+            background-color: Red;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* Darker background on mouse-over */
+        .btn-del:hover {
+            background-color: darkred;
+        }
+
+        .header{
+            font-family: 'Playfair Display SC', serif;
+            font-weight: 1500;
+            letter-spacing: 5px;
+            font-size: 34px;
+            color: darkblue;
+            text-align: center;
+        }
+        .menu{
+            background-color: azure;
+        }
+
+
+        body {
+            background-image: url("../images/pngtree-coffee-shop-poster-background-material-image_155518.jpg"); /* Путь к фоновому изображению */
+            /*background-color: #c7b39b; !* Цвет фона *!*/
+            font-weight: 600;
+            font-family: 'Playfair Display SC', serif;
+        }
+    </style>
+</head>
+<body>
+
+<ul class="nav nav-pills nav-fill">
+    <li class="nav-item"><a class="nav-link" href="/">Главная</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/employee">Сотрудники</a><br></li>
+    <li class="nav-item"><a class="nav-link active" href="/budget">Бюджет</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/ingredient">Ингредиенты</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/material">Материалы</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/position">Должности</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/product">Продукты</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/production">Производства</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/purchase">Закупка</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/sale">Продажа</a><br></li>
+    <li class="nav-item"><a class="nav-link" href="/salary">Зарплаты</a><br></li>
+</ul>
+
+<div th:object="${budget}" class="pl-3">
+    <h2 class="table-header">Бюджет</h2>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>Бюджет</th>
+            <th>Проценты надбавки</th>
+            <th align="right" width="200px"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr scope="row">
+            <td th:text="${budget.budget}"></td>
+            <td th:text="${budget.additive_percentage}"></td>
+<!--            <td><a th:href="@{/budget/edit/{id} (id=${budget.id})}">Редактировать</a></td>-->
+            <td>
+                <center>
+                    <a th:href="@{/budget/edit/{id} (id=${budget.id})}">
+                        <button class="btn-edit">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                            </svg>
+                        </button>
+                    </a>
+                </center>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
